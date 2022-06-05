@@ -65,9 +65,10 @@ export default function TileSet() {
         style={{
           transform: `translate(-50%, -50%) rotateX(62deg) rotateZ(${rotationValue}deg)`
         }}>
-        {tiles.map(tile => {
+        {tiles.map((tile, index) => {
           return (
             <button 
+              key={index}
               className={`
                 tile
                 ${tile.status}
