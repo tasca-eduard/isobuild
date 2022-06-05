@@ -17,6 +17,7 @@ html {
 
 body {
   background: $primaryBg;
+  width: 100%;
 }
 
 .tileset {
@@ -33,7 +34,7 @@ body {
     width: 256px;
     height: 256px;
     background: $secondaryBg;
-    box-shadow: inset -5px -5px 15px 5px darken($secondaryBg, 2%);
+    box-shadow: inset 0 0 25px 5px darken($secondaryBg, 2%);
     border: 2px solid $ternaryBg;
     border-radius: 15px;
     transition: .2s ease-in-out;
@@ -55,6 +56,7 @@ body {
       transform: translate3d(-50%, -50%, -60px);
       border-radius: 50%;
       transition: .2s ease-in-out;
+      animation: 1s glow2 alternate infinite cubic-bezier(0.445, 0.05, 0.55, 0.95);
     }
 
     &:hover,
@@ -62,10 +64,41 @@ body {
     &.selected {
       transform: translateZ(10px);
       background: lighten($secondaryBg, 1%);
-      box-shadow: inset -5px -5px 15px 5px darken($secondaryBg, 3%);
+      box-shadow: inset 0 0 25px 5px darken($secondaryBg, 3%);
 
       &::after {
         transform: translate3d(-50%, -50%, -70px);
+      }
+
+      .cube {
+        &::after {
+          box-shadow: 0 0 50px 20px $statusPaidBg;
+        }
+
+        .front {
+          transform: translateZ(88px);
+        }
+
+        .back {
+          transform: translateZ(-88px) rotateY(180deg);
+        }
+
+        .left {
+          transform: translateX(-88px) rotateY(-90deg);
+        }
+
+        .right {
+          transform: translateX(88px) rotateY(90deg);
+          background: darken($secondaryBg, .7%);
+        }
+
+        .top {
+          transform: translateY(-88px) rotateX(90deg);
+        }
+
+        .bottom {
+          transform: translateY(88px) rotateX(-90deg);
+        }
       }
     }
 
@@ -74,10 +107,22 @@ body {
         box-shadow: 0 0 80px 40px $statusPaidBg;
       }
 
+      .cube {
+        &::after {
+          box-shadow: 0 0 32px 20px $statusPaidBg;
+        }
+      }
+
       &:hover,
       &:focus-visible {
         &::after {
           box-shadow: 0 0 100px 30px $statusPaidBg;
+        }
+
+        .cube {
+          &::after {
+            box-shadow: 0 0 50px 20px $statusPaidBg;
+          }
         }
       }
     }
@@ -87,10 +132,22 @@ body {
         box-shadow: 0 0 80px 40px $statusPendingBg;
       }
 
+      .cube {
+        &::after {
+          box-shadow: 0 0 32px 20px $statusPendingBg;
+        }
+      }
+
       &:hover,
       &:focus-visible {
         &::after {
           box-shadow: 0 0 100px 30px $statusPendingBg;
+        }
+
+        .cube {
+          &::after {
+            box-shadow: 0 0 50px 20px $statusPendingBg;
+          }
         }
       }
     }
@@ -100,10 +157,22 @@ body {
         box-shadow: 0 0 80px 40px $statusUnpaidBg;
       }
 
+      .cube {
+        &::after {
+          box-shadow: 0 0 32px 20px $statusUnpaidBg;
+        }
+      }
+
       &:hover,
       &:focus-visible {
         &::after {
           box-shadow: 0 0 100px 30px $statusUnpaidBg;
+        }
+
+        .cube {
+          &::after {
+            box-shadow: 0 0 50px 20px $statusUnpaidBg;
+          }
         }
       }
     }
@@ -112,12 +181,23 @@ body {
 
 .controls {
   position: fixed;
-  bottom: 50px;
+  bottom: 256px;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
 
   .btn {
-    margin: 0 14px;
+    margin: 0 320px;
+    min-width: 120px;
+    pointer-events: all;
+  }
+
+  span {
+    padding: 0 10px;
+    font-size: 22px;
+    line-height: 1;
   }
 }
 
@@ -149,7 +229,18 @@ body {
   width: 128px;
   height: 128px;
   transform-style: preserve-3d;
-  transform: translateZ(64px);
+  transform: translateZ(74px);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px 20px $statusPaidBg;
+    transition: .2s ease-in-out;
+    animation: 1s glow alternate infinite cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  }
 
   .face {
     border-radius: 15px;
@@ -158,30 +249,51 @@ body {
     position: absolute;
     width: 128px;
     height: 128px;
+    transition: .2s ease-in-out;
   }
-  
+
   .front {
     transform: translateZ(64px);
   }
-  
+
   .back {
     transform: translateZ(-64px) rotateY(180deg);
   }
-  
+
   .left {
     transform: translateX(-64px) rotateY(-90deg);
   }
-  
+
   .right {
     transform: translateX(64px) rotateY(90deg);
     background: darken($secondaryBg, .7%);
   }
-  
+
   .top {
     transform: translateY(-64px) rotateX(90deg);
   }
-  
+
   .bottom {
     transform: translateY(64px) rotateX(-90deg);
+  }
+}
+
+@keyframes glow {
+  from {
+    transform: translateZ(5px);
+  }
+
+  to {
+    transform: translateZ(0);
+  }
+}
+
+@keyframes glow2 {
+  from {
+    transform: translateZ(-55px);
+  }
+
+  to {
+    transform: translateZ(-60px);
   }
 }

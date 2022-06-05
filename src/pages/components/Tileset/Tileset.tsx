@@ -46,7 +46,8 @@ export default function TileSet() {
       status: "success"
     },
     {
-      status: "success"
+      status: "success",
+      cube: true
     },
     {
       status: "pending"
@@ -93,8 +94,8 @@ export default function TileSet() {
         })}
       </div>
       <div className="controls">
-        <button className="btn" onClick={() => onChangeRotation("left")}>Left</button>
-        <button className="btn" onClick={() => onChangeRotation("right")}>Right</button>
+        <button className="btn" onClick={() => onChangeRotation("left")}><span>&#8592;</span> Left</button>
+        <button className="btn" onClick={() => onChangeRotation("right")}>Right <span>&#8594;</span></button>
       </div>
     </>
   )
