@@ -26,14 +26,14 @@ body {
   transform-style: preserve-3d;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 5px;
   transition: .7s cubic-bezier(0.23, 1, 0.320, 1);
 
   .tile {
     width: 256px;
     height: 256px;
     background: $secondaryBg;
-    box-shadow: 0 0 4px 4px $ternaryBg;
+    box-shadow: inset -5px -5px 15px 2px darken($secondaryBg, 4%);
     border: 2px solid $ternaryBg;
     border-radius: 15px;
     transition: .2s ease-in-out;
@@ -60,12 +60,13 @@ body {
     &.selected {
       transform: translateZ(10px);
       background: lighten($secondaryBg, 1%);
+      box-shadow: inset -5px -5px 15px 2px darken($secondaryBg, 5%);
 
       &::after {
         transform: translate3d(-50%, -50%, -70px);
       }
     }
-    
+
     &.success {
       &::after {
         box-shadow: 0 0 80px 40px $statusPaidBg;
@@ -131,7 +132,7 @@ body {
   transition: .2s cubic-bezier(0.165, 0.84, 0.44, 1);
   margin: 0 auto;
   color: $primaryText;
-  
+
   &:hover,
   &:focus-visible {
     background: darken($inputBg, 1%);
