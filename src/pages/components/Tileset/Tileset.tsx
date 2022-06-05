@@ -4,7 +4,8 @@ type TRotation = "left" | "right";
 type TStatus = "pending" | "success" | "fail";
 
 interface ITile {
-  status: TStatus
+  status: TStatus,
+  cube?: boolean
 }
 
 export default function TileSet() {
@@ -19,7 +20,6 @@ export default function TileSet() {
 
       case "right": {
         setRotationValue(prevRotationValue => prevRotationValue + 90);
-        break;
       }
     }
   }
@@ -32,13 +32,15 @@ export default function TileSet() {
       status: "fail"
     },
     {
-      status: "pending"
+      status: "pending",
+      cube: true
     },
     {
       status: "pending"
     },
     {
-      status: "fail"
+      status: "fail",
+      cube: true
     },
     {
       status: "success"
@@ -50,7 +52,8 @@ export default function TileSet() {
       status: "pending"
     },
     {
-      status: "fail"
+      status: "fail",
+      cube: true
     },
   ]
 
@@ -74,7 +77,18 @@ export default function TileSet() {
                 ${tile.status}
               `}
               onClick={onTileSelect}
-            ></button>
+            >
+              {tile.cube && (
+                <span className="cube">
+                  <span className="face top"></span>
+                  <span className="face bottom"></span>
+                  <span className="face left"></span>
+                  <span className="face right"></span>
+                  <span className="face front"></span>
+                  <span className="face back"></span>
+                </span>
+              )}
+            </button>
           )
         })}
       </div>

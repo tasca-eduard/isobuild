@@ -33,7 +33,7 @@ body {
     width: 256px;
     height: 256px;
     background: $secondaryBg;
-    box-shadow: inset -5px -5px 15px 2px darken($secondaryBg, 4%);
+    box-shadow: inset -5px -5px 15px 5px darken($secondaryBg, 2%);
     border: 2px solid $ternaryBg;
     border-radius: 15px;
     transition: .2s ease-in-out;
@@ -44,6 +44,8 @@ body {
     // important to have preserve-3d so children will not be affected by stacking context
     transform-style: preserve-3d;
     font-size: 24px;
+    display: grid;
+    place-items: center;
 
     &::after {
       content: "";
@@ -60,7 +62,7 @@ body {
     &.selected {
       transform: translateZ(10px);
       background: lighten($secondaryBg, 1%);
-      box-shadow: inset -5px -5px 15px 2px darken($secondaryBg, 5%);
+      box-shadow: inset -5px -5px 15px 5px darken($secondaryBg, 3%);
 
       &::after {
         transform: translate3d(-50%, -50%, -70px);
@@ -138,5 +140,48 @@ body {
     background: darken($inputBg, 1%);
     border-bottom: 2px solid $accent;
     outline: none;
+  }
+}
+
+.cube {
+  display: grid;
+  position: relative;
+  width: 128px;
+  height: 128px;
+  transform-style: preserve-3d;
+  transform: translateZ(64px);
+
+  .face {
+    border-radius: 15px;
+    box-shadow: inset 0 0 20px 0 darken($secondaryBg, 2%);
+    background: $secondaryBg;
+    position: absolute;
+    width: 128px;
+    height: 128px;
+  }
+  
+  .front {
+    transform: translateZ(64px);
+  }
+  
+  .back {
+    transform: translateZ(-64px) rotateY(180deg);
+  }
+  
+  .left {
+    transform: translateX(-64px) rotateY(-90deg);
+  }
+  
+  .right {
+    transform: translateX(64px) rotateY(90deg);
+    background: darken($secondaryBg, .7%);
+  }
+  
+  .top {
+    transform: translateY(-64px) rotateX(90deg);
+  }
+  
+  .bottom {
+    transform: translateY(64px) rotateX(-90deg);
   }
 }
